@@ -1,0 +1,100 @@
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRN-Vidros</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+    <div class="header-content">
+      <img src="img/logo-frn.png" alt="Logo FRN-Vidros">
+
+      <div>
+        <h1>FRN-Vidros</h1>
+        <p>Desenho técnico de vidro</p>
+      </div>
+    </div>
+  </header>
+
+    <main>
+      <section class="painel">
+        <h2>Configurar</h2>
+
+        <label>Modelo</label>
+        <select id="modelo">
+          <option value="box4">Janela 4 folhas</option>
+          <option value="box2">Box deslizante 2 peças</option>
+          <option value="porta1">Porta 1 folha</option>
+          <option value="box2frontal">Box frontal 2 peças</option>
+        </select>
+
+        <label>Tipo do vidro</label>
+        <select id="tipoVidro">
+          <option value="VIDRO FUMÊ">Vidro fumê</option>
+          <option value="VIDRO INCOLOR">Vidro incolor</option>
+        </select>
+
+        <label>Espessura</label>
+        <select id="espessura">
+          <option value="8MM">8MM</option>
+          <option value="10MM">10MM</option>
+          <option value="6MM">6MM</option>
+        </select>
+
+        <div class="grid">
+          <div>
+            <label>Largura superior</label>
+            <input id="larguraSuperior" value="2,80m">
+          </div>
+          <div>
+            <label>Largura inferior</label>
+            <input id="larguraInferior" value="2,80m">
+          </div>
+          <div>
+            <label>Altura esquerda</label>
+            <input id="alturaEsquerda" value="2,10m">
+          </div>
+          <div>
+            <label>Altura direita</label>
+            <input id="alturaDireita" value="2,10m">
+          </div>
+        </div>
+
+        <label>Observações</label>
+        <textarea id="obs" placeholder="Ex: trilho branco, puxador central..."></textarea>
+
+        <button onclick="atualizar()">Atualizar medida</button>
+        <button class="verde" onclick="gerarPDF()">Gerar PDF</button>
+      </section>
+
+      <section class="preview">
+        <div id="pdf" class="folha">
+          <div class="cabecalho">
+            <div>
+              <h2>FRN-Vidros</h2>
+              <p>Desenho técnico para orçamento/fabricação</p>
+            </div>
+            <div class="info">
+              <p><strong>Modelo:</strong> <span id="nomeModelo"></span></p>
+              <p><strong>Vidro:</strong> <span id="nomeVidro"></span></p>
+            </div>
+          </div>
+
+          <div class="area">
+            <svg id="desenho" viewBox="0 0 900 520"></svg>
+          </div>
+
+          <div class="rodape">
+            <p><strong>Observações:</strong> <span id="obsFinal">Nenhuma</span></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+  </html>
