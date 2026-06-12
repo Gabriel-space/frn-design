@@ -92,10 +92,24 @@ button.verde {
 }
 
 .folha {
-    width: 940px;
+    width: 100%;
+    max-width: 940px;
     min-height: 720px;
     padding: 28px;
-    margin: auto
+    margin: auto;
+}
+
+.area {
+    width: 100%;
+    max-width: 880px;
+    height: 520px;
+    margin: auto;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
 }
 
 .cabecalho {
@@ -134,15 +148,39 @@ button.verde {
     padding-top: 12px
 }
 
-@media(max-width:1000px) {
+@media (max-width: 1000px) {
     main {
         grid-template-columns: 1fr;
-        padding: 15px
+        padding: 15px;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .header-content img {
+        width: 100%;
+        max-width: 220px;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info {
+        text-align: left;
+        width: 100%;
     }
 
     .folha {
-        transform: scale(.75);
-        transform-origin: top left
+        padding: 20px;
+    }
+
+    .area {
+        height: auto;
+        min-height: 320px;
     }
 }
 
