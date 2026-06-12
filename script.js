@@ -1,8 +1,9 @@
   const nomes = {
-    box4: "Janela 4 folhas",
-    box2: "Janela",
-    porta1: "Porta 1 folha",
-    box2frontal: "Box frontal 2 peças",
+    janela1: "Janela 4 folhas",
+    janela2: "Janela",
+    porta1: "Porta",
+    box1: "Box deslizante",
+    porta2: "Porta puxador",
   };
 
   function l(x1, y1, x2, y2, w = 2, color = "#999") {
@@ -24,6 +25,35 @@
 
   function dot(x, y) {
     return `<circle cx="${x}" cy="${y}" r="5" fill="#999"/>`;
+  }
+  function puxador(x, y) {
+    return `
+      <rect
+        x="${x}"
+        y="${y}"
+        width="18"
+        height="30"
+        rx="3"
+        fill="#999"
+        stroke="#777"
+        stroke-width="1"
+      />
+    `;
+  }
+
+  function canto(x, y, w = 35, h = 12) {
+    return `
+      <rect
+        x="${x} "
+        y="${y}"
+        width="${w}"
+        height="${h}"
+        fill="#8c8c8c"
+        stroke="#666"
+        stroke-width="1"
+        rx="1"
+      />
+    `;
   }
 
   function holePair(x, y) {
@@ -71,7 +101,7 @@
     `;
   }
 
-  function box4(ls, li, ae, ad) {
+  function janela1(ls, li, ae, ad) {
     const yCentro = 115;
     const hCentro = 300;
 
@@ -124,7 +154,7 @@
     `;
   }
 
-  function box2(ls, li, ae, ad) {
+  function janela2(ls, li, ae, ad) {
     const yEsquerda = 96;
     const hEsquerda = 326;
 
@@ -141,7 +171,7 @@
       ${dimHUpper(x1, x2 + w2, 40, ls)}
 
       ${dimV(x1 - 55, yEsquerda, yEsquerda + hEsquerda, ae, "left")}
-      ${dimV(x2 + w2 + 55, yDireita, yDireita + hDireita, ad, "right")}
+      ${dimV(x2 + w2 + 55, yEsquerda, yDireita + hDireita, ad, "right")}
 
       ${r(x1, yEsquerda, w1, hEsquerda)}
       ${r(x2, yDireita, w2, hDireita)}
@@ -156,7 +186,6 @@
       ${oneX(x1 + w1 / 2, yEsquerda + 140)}
       ${oneX(x2 + w2 / 2, yDireita + 140)}
 
-      ${l(x1 + 80, yEsquerda + 230, x1 + 80, yEsquerda + hEsquerda, 2, "#999")}
 
       ${dimH(x1, x2 + w2, 470, li)}
     `;
@@ -165,7 +194,7 @@
   function porta1(ls, li, ae, ad) {
     const x = 345;
     const y = 55;
-    const w = 210;
+    const w = 260;
     const h = 410;
 
     return `
@@ -175,48 +204,82 @@
 
       ${r(x, y, w, h)}
 
-      ${dot(x + w - 15, y + 15)}
-      ${dot(x + w - 15, y + h - 15)}
+      ${dot(x + w - 15, y + 12)}
+      ${dot(x + w - 245, y + h - 398)}
 
       ${oneX(x + w / 2, y + 90)}
-
-      ${l(x + 45, y + 120, x + 45, y + 260, 2, "#999")}
-      ${holePair(x + 17, y + 180)}
+      ${dot(x + 28, y + 195)}
+      ${dot(x + 15, y + 180)}
+      ${dot(x + 15, y + 210)}
 
       ${dimH(x, x + w, y + h + 22, li)}
     `;
   }
 
-  function box2frontal(ls, li, ae, ad) {
-    const y = 105;
-    const h = 330;
-
-    const x1 = 275;
-    const w1 = 190;
-
-    const x2 = 465;
-    const w2 = 180;
+  function porta2(ls, li, ae, ad) {
+    const x = 345;
+    const y = 55;
+    const w = 260;
+    const h = 410;
 
     return `
-      ${dimHUpper(x1, x2 + w2, 55, ls)}
-      ${dimV(225, y, y + h, ae, "left")}
-      ${dimV(695, y, y + h, ad, "right")}
+      ${dimHUpper(x, x + w, 35, ls)}
+      ${dimV(x - 45, y, y + h, ae, "left")}
+      ${dimV(x + w + 45, y, y + h, ad, "right")}
 
-      ${r(x1, y, w1, h)}
-      ${r(x2, y, w2, h)}
+      ${r(x, y, w, h)}
 
-      ${dashV(x2 - 8, y, y + h)}
-      ${l(x2, y, x2, y + h, 3, "#999")}
+      ${canto(x + w - 35, y)}
+      ${canto(x + w - 35, y + h - 12)}
 
-      ${dot(x1 + 15, y + 15)}
-      ${dot(x1 + w1 - 15, y + 15)}
-      ${holePair(x1 + 15, y + 190)}
+      ${oneX(x + w / 2, y + 90)}
 
-      ${oneX(x1 + w1 / 2, y + 85)}
-      ${oneX(x2 + w2 / 2, y + 85)}
+      ${l(x + 45, y + 132, x + 45, y + 245, 2, "#999")}
+      ${puxador(x + - 1, y + 170)}
+      ${dot(x + 45, y + 150)}
+      ${dot(x + 45, y + 225)}
 
-      ${dimH(x1, x1 + w1, y + h + 35,li)}
-      ${dimH(x2, x2 + w2, y + h + 35,li)}
+      ${dimH(x, x + w, y + h + 22, li)}
+    `;
+  }
+
+  function box1(ls, li, ae, ad) {
+    const yCentro = 80;
+    const hCentro = 360;
+
+    const yLateral = 97;
+    const hLateral = 343;
+
+    const x1 = 260;
+    const w1 = 200;
+
+    const x3 = 260;
+    const w3 = 190;
+
+    const x4 = 440;
+    const w4 = 200;
+
+    return `
+      ${dimHUpper(x1, x4 + w4, 40, ls)}
+      ${dimV(230, yLateral, yLateral + hLateral, ae, "left")}
+      ${dimV(670, yLateral, yLateral +  hLateral, ad, "right")}
+
+      ${r(x3, yCentro, w3, hCentro)}
+      ${r(x4, yLateral, w4, hLateral)}
+
+      ${dashV(x4 + 12, yLateral, yLateral + hLateral)}
+
+
+      ${dot(x3 + 15, yCentro + 15)}
+      ${dot(x3 + w3 - 18, yCentro + 12)}
+      ${dot(x3 + w3 - 175, yCentro + 175)}
+
+
+
+      ${oneX(x3 + w3 / 2, yCentro + 75)}
+      ${oneX(x4 + w4 / 2, yLateral + 75)}
+
+      ${dimH(x1, x4 + w1, yLateral + hLateral + 45, li)}
     `;
   }
 
@@ -247,10 +310,11 @@
     document.getElementById("obs").value || "Nenhuma";
 
   const desenhos = {
-    box4,
-    box2,
+    janela1,
+    janela2,
     porta1,
-    box2frontal,
+    box1,
+    porta2,
   };
 
   document.getElementById("desenho").innerHTML = desenhos[modelo](
@@ -282,7 +346,7 @@ async function gerarPDF() {
 
 function carregarDadosSalvos() {
   document.getElementById("modelo").value =
-    localStorage.getItem("modelo") || "box4";
+    localStorage.getItem("modelo") || "janela1";
 
   document.getElementById("tipoVidro").value =
     localStorage.getItem("tipoVidro") || "VIDRO FUMÊ";
